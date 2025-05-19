@@ -84,7 +84,14 @@ describe('Basic user flow for Website', () => {
      * Check to see if the innerText of #cart-count is 20
      * Remember to remove the .skip from this it once you are finished writing this test.
      */
-
+    const prodItems = await page.$$('product-item');
+    for (const item of prodItems) {
+      const shadowRoot = await item.getProperty('shadowRoot');
+      const button = await shadowRoot.$('button');
+      await button.click();
+    }
+    const cartCount = await page.$eval('#cart-count', el => el.innerText);
+    expect(cartCount).toBe('20');
   }, 10000);
 
   // Check to make sure that after you reload the page it remembers all of the items in your cart
