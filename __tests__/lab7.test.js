@@ -105,7 +105,7 @@ describe('Basic user flow for Website', () => {
       await button.click();
     }
 
-    const cartCount = await page.$eval('#cart-count', (product) => product.innerText);
+    const cartCount = await page.$eval('#cart-count', (el) => el.innerText);
     expect(cartCount).toBe('20');
 
   }, 20000);
